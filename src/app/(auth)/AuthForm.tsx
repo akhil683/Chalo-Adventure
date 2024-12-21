@@ -39,14 +39,10 @@ export function AuthForm({ mode }: AuthFormProps) {
   })
 
   const loginHandler = async (data: LoginFormData | SignupFormData) => {
-    console.log(data)
-    const res = await API.post("/auth/login", data)
-    console.log(res)
+    await API.post("/auth/login", data)
   }
   const signUpHandler = async (data: LoginFormData | SignupFormData) => {
-    console.log(data)
-    const res = await axios.post("http://localhost:5000/auth/register", data)
-    console.log(res)
+    await API.post("/auth/register", data)
   }
 
   const { mutate: auth, isPending, isError } = useMutation({
@@ -112,16 +108,13 @@ export function AuthForm({ mode }: AuthFormProps) {
             )}
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" placeholder="hello@chaloadventure.com" type="email" {...register('email')} />
+              <Input id="email" placeholder="akhil@chaloadventure.com" type="email" {...register('email')} />
               {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" {...register('password')} />
               {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
-            </div>
-            <div className='space-y-2'>
-              <Link href={"/password/forgot"} className='text-sm text-green-600 fontsemi'>Forgot Password ?</Link>
             </div>
             {mode === 'signup' && (
               <div className="space-y-2">
@@ -130,6 +123,9 @@ export function AuthForm({ mode }: AuthFormProps) {
                 {/* {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>} */}
               </div>
             )}
+            <div className='space-y-2'>
+              <Link href={"/password/forgot"} className='text-sm text-green-600 fontsemi'>Forgot Password ?</Link>
+            </div>
             <Button
               className="w-full"
               type="submit"
