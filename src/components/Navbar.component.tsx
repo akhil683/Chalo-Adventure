@@ -35,36 +35,8 @@ export default function Navbar() {
             </div>
           </div>
           <MobileNav />
-          {/* <div className="md:hidden"> */}
-          {/*   <button */}
-          {/*     onClick={() => setIsOpen(!isOpen)} */}
-          {/*     className="text-gray-800 hover:text-orange-500 transition-colors" */}
-          {/*     aria-label="Toggle menu" */}
-          {/*   > */}
-          {/*     {isOpen ? <X size={24} /> : <Menu size={24} />} */}
-          {/*   </button> */}
-          {/* </div> */}
         </div>
       </div>
-      {/* {isOpen && ( */}
-      {/*   <motion.div */}
-      {/*     initial={{ opacity: 0, y: -20 }} */}
-      {/*     animate={{ opacity: 1, y: 0 }} */}
-      {/*     exit={{ opacity: 0, y: -20 }} */}
-      {/*     className="md:hidden" */}
-      {/*   > */}
-      {/*     <div className="px-2 pt-2 pb-8 space-y-2 sm:px-3 bg-gray-100 bg-opacity-90 shadow-lg flex flex-col justify-center items-center gap-6"> */}
-      {/*       {navbarLinks.map((link: navlinkType) => ( */}
-      {/*         <NavLink */}
-      {/*           key={link.link} */}
-      {/*           href={link.link} */}
-      {/*         > */}
-      {/*           {link.name} */}
-      {/*         </NavLink> */}
-      {/*       ))} */}
-      {/*     </div> */}
-      {/*   </motion.div> */}
-      {/* )} */}
     </nav>
   )
 }

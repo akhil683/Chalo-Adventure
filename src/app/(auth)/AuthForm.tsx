@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from "@/components/ui/button"
@@ -10,6 +9,10 @@ import { Icons } from '@/constants/GoogleIcon'
 import { loginSchema, signupSchema, LoginFormData, SignupFormData } from '@/schemas/auth'
 import Link from 'next/link'
 import { Logo } from '@/constants/Logo'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
+import axios from 'axios'
+import API from '@/config/apiClient'
 
 interface AuthFormProps {
   mode: 'login' | 'signup'
@@ -17,7 +20,7 @@ interface AuthFormProps {
 
 export function AuthForm({ mode }: AuthFormProps) {
 
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const router = useRouter()
 
   const {
     register,
@@ -35,15 +38,28 @@ export function AuthForm({ mode }: AuthFormProps) {
     ),
   })
 
-  const onSubmit = async (data: LoginFormData | SignupFormData) => {
+  const loginHandler = async (data: LoginFormData | SignupFormData) => {
+    console.log(data)
+    const res = await API.post("/auth/login", data)
+    console.log(res)
+  }
+  const signUpHandler = async (data: LoginFormData | SignupFormData) => {
+    console.log(data)
+    const res = await axios.post("http://localhost:5000/auth/register", data)
+    console.log(res)
+  }
+
+  const { mutate: auth, isPending, isError } = useMutation({
+    mutationFn: mode === "signup" ? signUpHandler : loginHandler,
+    onSuccess: () => router.replace("/"),
+  })
+
+  const onSubmitHandler = async (data: LoginFormData | SignupFormData) => {
+    console.log("onsubmit")
+    auth(data)
     try {
-      setIsLoading(true)
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      console.log(data)
     } catch (e) {
       console.error(e)
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -69,7 +85,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       <div className="space-y-4">
 
         {/* Google Sign In */}
-        <Button variant="outline" disabled={isLoading} className="w-full">
+        <Button variant="outline" disabled={isPending} className="w-full">
           <Icons.google className="mr-2 h-4 w-4" />
           {mode === 'login' ? 'Sign in' : 'Sign up'} with Google
         </Button>
@@ -83,9 +99,9 @@ export function AuthForm({ mode }: AuthFormProps) {
             <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
           </div>
         </div>
-
+        {isError && <p className='text-red-600'>Invalid email or password</p>}
         {/* Authentication Form */}
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmitHandler)}>
           <div className="space-y-4">
             {mode === 'signup' && (
               <div className="space-y-2">
@@ -104,6 +120,9 @@ export function AuthForm({ mode }: AuthFormProps) {
               <Input id="password" type="password" {...register('password')} />
               {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
             </div>
+            <div className='space-y-2'>
+              <Link href={"/password/forgot"} className='text-sm text-green-600 fontsemi'>Forgot Password ?</Link>
+            </div>
             {mode === 'signup' && (
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword">Confirm Password</Label>
@@ -114,9 +133,9 @@ export function AuthForm({ mode }: AuthFormProps) {
             <Button
               className="w-full"
               type="submit"
-              disabled={isLoading}
+              disabled={isPending}
             >
-              {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
+              {isPending && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
               {mode === 'login' ? 'Sign In' : 'Sign Up'}
             </Button>
           </div>
@@ -132,7 +151,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           {" "}
           <Link
             href={mode === 'login' ? '/sign-up' : '/sign-in'}
-            className="font-semibold text-orange-600 hover:underline"
+            className="text-green-600 hover:underline"
           >
             {mode === 'login'
               ? 'Sign up'
