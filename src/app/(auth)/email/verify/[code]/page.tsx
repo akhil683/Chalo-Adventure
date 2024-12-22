@@ -1,12 +1,12 @@
 import React from 'react'
 import VerifyCode from './VerifyCode'
 
-interface PropType {
-  params: {
+interface PropsType {
+  params: Promise<{
     code: string
-  }
+  }>
 }
-const VerifyEmail = async ({ params }: PropType) => {
+const VerifyEmail = async ({ params }: PropsType) => {
   const { code } = await params
 
   return (
