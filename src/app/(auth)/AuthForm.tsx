@@ -11,7 +11,6 @@ import Link from 'next/link'
 import { Logo } from '@/constants/Logo'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
-import axios from 'axios'
 import API from '@/config/apiClient'
 
 interface AuthFormProps {
