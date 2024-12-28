@@ -123,7 +123,9 @@ export function AuthForm({ mode }: AuthFormProps) {
               </div>
             )}
             <div className='space-y-2'>
-              <Link href={"/password/forgot"} className='text-sm text-green-600 fontsemi'>Forgot Password ?</Link>
+              <Link href={"/password/forgot"} className='text-sm text-primaryGreen fontsemi'>
+                Forgot Password ?
+              </Link>
             </div>
             <Button
               className="w-full"
@@ -146,7 +148,7 @@ export function AuthForm({ mode }: AuthFormProps) {
           {" "}
           <Link
             href={mode === 'login' ? '/sign-up' : '/sign-in'}
-            className="text-green-600 hover:underline"
+            className="text-primaryGreen hover:underline"
           >
             {mode === 'login'
               ? 'Sign up'

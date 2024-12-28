@@ -1,7 +1,3 @@
-"use client"
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
 import { navbarLinks, navlinkType } from '@/constants/navbarLinks'
 import Link from 'next/link'
 import MobileNav from './MobileNav.component'
@@ -13,14 +9,13 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
 )
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-white bg-opacity-80 backdrop-blur-md">
+    <nav className="fixed top-0 left-0 right-0 z-40 bg-white bg-opacity-80 backdrop-blur-md border-b border-solid border-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 md:h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-green-600 text-2xl font-bold">Chalo Adventure</Link>
+            <Link href="/" className="text-primaryGreen text-2xl font-bold">Chalo Adventure</Link>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline gap-6 space-x-4">
@@ -34,7 +29,9 @@ export default function Navbar() {
               ))}
             </div>
           </div>
-          <MobileNav />
+          <div className='md:hidden'>
+            <MobileNav />
+          </div>
         </div>
       </div>
     </nav>

@@ -5,7 +5,7 @@ export default function AuthPage({ children }: { children: React.ReactNode }) {
   return (
     <section className="flex min-h-screen">
       {/* Left side with logo and image */}
-      <div className="hidden w-1/2 bg-green-600 lg:block">
+      <div className="hidden w-1/2 bg-primaryGreen lg:block">
         <div className="flex h-full flex-col justify-between p-8">
           <Logo />
           <div className="relative h-2/3 w-full">

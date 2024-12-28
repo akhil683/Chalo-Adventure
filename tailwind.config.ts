@@ -15,6 +15,8 @@ const config: Config = {
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        primaryGreen: 'rgb(22, 163, 74)',
+        primaryOrange: 'rgba(249,155, 22)',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'

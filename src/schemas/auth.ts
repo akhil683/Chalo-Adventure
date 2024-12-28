@@ -15,11 +15,16 @@ export const signupSchema = z.object({
   path: ["confirmPassword"],
 })
 
-export const resetPasswordSchema = z.object({
+export const resetPasswordEmailSchema = z.object({
   email
+})
+export const resetPasswordSchema = z.object({
+  password,
+  confirmPassword: password
 })
 
 export type LoginFormData = z.infer<typeof loginSchema>
 export type SignupFormData = z.infer<typeof signupSchema>
+export type ResetPasswordEmailData = z.infer<typeof resetPasswordEmailSchema>
 export type ResetPasswordData = z.infer<typeof resetPasswordSchema>
 

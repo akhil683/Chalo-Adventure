@@ -68,7 +68,7 @@ export default function Hero() {
         >
           We seek Adventure !
           <br />
-          Explore the nature with <span className="text-orange-500">Chalo Adventure</span>
+          Explore the nature with <span className="text-primaryOrange">Chalo Adventure</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: -20 }}
@@ -84,12 +84,12 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="space-x-4"
         >
-          <Button size="lg" asChild className="bg-orange-500 text-white hover:bg-orange-600 shadow-lg">
+          <Button size="lg" asChild className="bg-primaryOrange text-white hover:bg-orange-600 shadow-lg">
             <Link href={"/vehicle"}>
               Book Your Ride
             </Link>
           </Button>
-          <Button size="lg" variant="outline" className="bg-white bg-opacity-50 text-green-700 border-green-600 hover:bg-green-100 shadow-lg">
+          <Button size="lg" variant="outline" className="bg-white bg-opacity-50 text-green-700 border-primaryGreen hover:bg-green-100 shadow-lg">
             <Link href={"/camping-gear"}>
               Explore Destinations
             </Link>

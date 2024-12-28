@@ -38,7 +38,7 @@ export function RentVehiclesSection() {
               ))}
             </ul>
             <Button asChild size="lg">
-              <Link href="/vehicle" className="bg-green-600 hover:bg-green-700">
+              <Link href="/vehicle" className="bg-primaryGreen hover:bg-green-700">
                 Explore Vehicles <ChevronRight className="ml-2" />
               </Link>
             </Button>
