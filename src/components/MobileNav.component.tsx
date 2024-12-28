@@ -31,6 +31,9 @@ export default function MobileNav() {
                 <Link href={route.link}>{route.name}</Link>
               </SheetClose>
             ))}
+            <SheetClose asChild>
+              <Link href={"/sign-in"}>Log In</Link>
+            </SheetClose>
           </div>
         </div>
       </SheetContent>

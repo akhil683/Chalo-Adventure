@@ -1,6 +1,11 @@
+"use client"
 import { navbarLinks, navlinkType } from '@/constants/navbarLinks'
 import Link from 'next/link'
 import MobileNav from './MobileNav.component'
+import { User2 } from "lucide-react"
+import API from '@/config/apiClient';
+import { useQuery } from '@tanstack/react-query';
+import { UserType } from '@/types'
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
   <Link href={href} className="text-gray-800 hover:text-orange-500 transition-colors font-medium max-md:text-lg">
@@ -9,6 +14,15 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
 )
 
 export default function Navbar() {
+
+  const { data: user } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const res: UserType = await API.get("/user")
+      console.log(res)
+      return res
+    },
+  })
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-white bg-opacity-80 backdrop-blur-md border-b border-solid border-gray-300">
@@ -27,6 +41,23 @@ export default function Navbar() {
                   {link.name}
                 </NavLink>
               ))}
+              {user
+                ?
+                <NavLink
+                  href={"/profile"}
+                >
+                  Hi, {" "}
+                  <span className='text-primaryGreen text-lg'>
+                    {user.name}
+                  </span>
+                </NavLink>
+                :
+                <NavLink
+                  href={"/sign-in"}
+                >
+                  Log In
+                </NavLink>
+              }
             </div>
           </div>
           <div className='md:hidden'>

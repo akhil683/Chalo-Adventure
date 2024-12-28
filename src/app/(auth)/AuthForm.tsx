@@ -46,13 +46,18 @@ export function AuthForm({ mode }: AuthFormProps) {
 
   const { mutate: auth, isPending, isError } = useMutation({
     mutationFn: mode === "signup" ? signUpHandler : loginHandler,
-    onSuccess: () => router.replace("/"),
+    onSuccess: () => {
+      alert("User login sucessfull")
+      router.replace("/")
+    },
+    onError: () => {
+      alert("Error Occuredd")
+    }
   })
 
   const onSubmitHandler = async (data: LoginFormData | SignupFormData) => {
-    console.log("onsubmit")
-    auth(data)
     try {
+      auth(data)
     } catch (e) {
       console.error(e)
     }

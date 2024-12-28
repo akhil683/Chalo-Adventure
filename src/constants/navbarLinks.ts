@@ -20,8 +20,4 @@ export const navbarLinks: navlinkType[] = [
     name: "About Us",
     link: "/about-us",
   },
-  {
-    name: "Login",
-    link: "/sign-in",
-  },
 ];
